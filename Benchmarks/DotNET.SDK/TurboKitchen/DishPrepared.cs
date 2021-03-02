@@ -1,6 +1,7 @@
 // Copyright (c) Dolittle. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
 using Dolittle.SDK.Events;
 
 namespace Kitchen 
@@ -8,13 +9,15 @@ namespace Kitchen
     [EventType("1844473f-d714-4327-8b7f-5b3c2bdfc26a")]
     public class DishPrepared
     {
-        public DishPrepared (string dish, string chef)
+        public DishPrepared (string dish, string chef, DateTime time)
         {
             Dish = dish;
             Chef = chef;
+            Time = time;
         }
 
         public string Dish { get; }
         public string Chef { get; }
+        public DateTime Time { get; }
     }
 }

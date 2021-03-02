@@ -1,31 +1,26 @@
 // Copyright (c) Dolittle. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
+using Google.Protobuf;
 
 namespace Dolittle.Runtime.Services.Client
 {
     /// <summary>
-    /// Defines a client for reverse calls coming from the server to the client.
+    /// Defines a reverse call protocol.
     /// </summary>
+    /// <typeparam name="TClientMessage">Type of the messages that is sent from the client to the server.</typeparam>
+    /// <typeparam name="TServerMessage">Type of the messages that is sent from the server to the client.</typeparam>
     /// <typeparam name="TConnectArguments">Type of the arguments that are sent along with the initial Connect call.</typeparam>
     /// <typeparam name="TConnectResponse">Type of the response that is received after the initial Connect call.</typeparam>
     /// <typeparam name="TRequest">Type of the requests sent from the server to the client.</typeparam>
     /// <typeparam name="TResponse">Type of the responses received from the client.</typeparam>
-    public interface IReverseCallClient<TConnectArguments, TConnectResponse, TRequest, TResponse> : IObservable<TConnectResponse>
+    public interface IAmAReverseCallProtocol<TClientMessage, TServerMessage, TConnectArguments, TConnectResponse, TRequest, TResponse> : ICanCallADuplexStreamingMethod<TClientMessage, TServerMessage>, IConvertReverseCallMessages<TClientMessage, TServerMessage, TConnectArguments, TConnectResponse, TRequest, TResponse>
+        where TClientMessage : IMessage
+        where TServerMessage : IMessage
         where TConnectArguments : class
         where TConnectResponse : class
         where TRequest : class
         where TResponse : class
     {
-        /// <summary>
-        /// Gets the connect arguments that will be sent to the server when subscribed.
-        /// </summary>
-        TConnectArguments Arguments { get; }
-
-        /// <summary>
-        /// Gets the handler that handles requests from the server.
-        /// </summary>
-        IReverseCallHandler<TRequest, TResponse> Handler { get; }
     }
 }

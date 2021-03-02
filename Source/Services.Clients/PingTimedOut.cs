@@ -3,18 +3,19 @@
 
 using System;
 
-namespace Dolittle.Runtime.Services.Clients
+namespace Dolittle.Runtime.Services.Client
 {
     /// <summary>
-    /// Exception that gets thrown when ping timed out.
+    /// Exception that gets thrown when the server does not send a ping within the specified ping interval on an open reverse call.
     /// </summary>
     public class PingTimedOut : Exception
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PingTimedOut"/> class.
         /// </summary>
-        public PingTimedOut()
-            : base("Ping timed out")
+        /// <param name="timeSpan">The interval which the client asked the server to use between ping messages.</param>
+        public PingTimedOut(TimeSpan timeSpan)
+            : base($"Timed out while waiting for a ping from the server. Expected a ping every {timeSpan.TotalSeconds} seconds.")
         {
         }
     }

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../default.props"/>
+
+  <PropertyGroup>
+    <AssemblyName>Dolittle.Runtime.Services</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Booting/Booting.csproj"/>
+    <ProjectReference Include="../Rudimentary/Rudimentary.csproj"/>
+    <ProjectReference Include="../Configuration/Configuration.csproj"/>
+    <ProjectReference Include="../Serialization.Json/Serialization.Json.csproj"/>
+    <ProjectReference Include="../Protobuf/Protobuf.csproj"/>
+    <ProjectReference Include="../Types/Types.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dolittle.Runtime.Contracts" Version="$(ContractsVersion)" />
+    <PackageReference Include="Dolittle.Contracts" Version="$(ContractsVersion)" />
+    <PackageReference Include="Google.Protobuf" Version="$(ProtobufVersion)" />
+    <PackageReference Include="Grpc" Version="$(GrpcVersion)" />
+  </ItemGroup>
+</Project>
